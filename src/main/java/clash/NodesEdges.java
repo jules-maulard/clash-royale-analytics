@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -18,7 +17,7 @@ public class NodesEdges {
     
 
     public static class NodesEdgesMapper
-        extends Mapper<LongWritable, Text, Text, Text>{
+        extends Mapper<NullWritable, Text, Text, Text>{
 
         private final ObjectMapper objectMapper = new ObjectMapper();
         private int minArchetypeSize;
@@ -30,7 +29,7 @@ public class NodesEdges {
         
         @Override
         protected void map(
-            LongWritable key, Text value, Context context
+            NullWritable key, Text value, Context context
         ) throws IOException, InterruptedException {
 
             String jsonLine = value.toString();

@@ -9,20 +9,15 @@ def extract_metric(text, regex):
     return int(match.group(1)) if match else 0
 
 def parse_filename_strict(filename):
-    # NOUVELLE LOGIQUE
-    # Format 1 (Standard) : bench_DATASET_MINSIZE.log  -> Combiner ON
-    # Format 2 (Sans Comb): bench_DATASET_MINSIZE_noCombine.log -> Combiner OFF
-    
     clean_name = filename.replace(".log", "")
     parts = clean_name.split("_")
     
     meta = {
         "Dataset": "Unknown", 
         "MinSize": 0, 
-        "Combiner": "ON" # Par défaut ON
+        "Combiner": "ON"
     }
     
-    # On vérifie qu'on a au moins 3 parties (bench, dataset, size)
     if len(parts) >= 3:
         meta["Dataset"] = parts[1]
         try:
@@ -30,7 +25,6 @@ def parse_filename_strict(filename):
         except ValueError:
             meta["MinSize"] = 0
             
-        # Vérification du flag "noCombine" en 4ème position
         if len(parts) >= 4 and "nocombine" in parts[3].lower():
             meta["Combiner"] = "OFF"
             
@@ -40,9 +34,9 @@ def parse_filename_strict(filename):
     return meta
 
 def process_all_logs():
-    # Chemin relatif : dossier 'logs' au même niveau que le script
     log_dir = os.path.join(os.path.dirname(__file__), "logs")
     log_pattern = os.path.join(log_dir, "*.log")
+    output_file = "benchmark_summary.csv"
     
     log_files = glob.glob(log_pattern)
     
@@ -81,18 +75,27 @@ def process_all_logs():
             }
             all_jobs_data.append(metrics)
 
-    df = pd.DataFrame(all_jobs_data)
+    new_df = pd.DataFrame(all_jobs_data)
     
-    if not df.empty:
-        # Tri intelligent
-        df = df.sort_values(by=["Dataset", "Combiner", "MinSize", "Job Name"])
+    if os.path.exists(output_file):
+        try:
+            existing_df = pd.read_csv(output_file, sep=";")
+            if not new_df.empty:
+                processed_files = new_df["Log File"].unique()
+                existing_df = existing_df[~existing_df["Log File"].isin(processed_files)]
+                
+            final_df = pd.concat([existing_df, new_df], ignore_index=True)
+        except pd.errors.EmptyDataError:
+            final_df = new_df
+    else:
+        final_df = new_df
 
-    output_file = "benchmark_summary.csv"
-    df.to_csv(output_file, index=False, sep=";")
-    
-    print(f"\n[SUCCESS] Données fusionnées dans '{output_file}'")
-    if not df.empty:
-        print(df[["Log File", "Combiner", "Job Name", "Shuffle Bytes", "CPU Time (ms)"]].to_string(index=False))
+    if not final_df.empty:
+        final_df = final_df.sort_values(by=["Dataset", "Combiner", "MinSize", "Job Name"])
+        final_df.to_csv(output_file, index=False, sep=";")
+        
+        print(f"\n[SUCCESS] Données mises à jour dans '{output_file}'")
+        print(final_df[["Log File", "Combiner", "Job Name", "Shuffle Bytes", "CPU Time (ms)"]].tail(10).to_string(index=False))
 
 if __name__ == "__main__":
     process_all_logs()

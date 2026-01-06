@@ -18,6 +18,12 @@ import org.apache.htrace.fasterxml.jackson.databind.ObjectMapper;
 
 public class DataCleaning {
 
+    public enum DataQuality {
+        INVALID_JSON,
+        INVALID_FIELDS,
+        INVALID_DECK_SIZE,      // Pas 8 cartes
+        INVALID_DECK_DUPLICATE, // Cartes identiques dans le deck
+    }
 
     public static class CleaningMapper
         extends Mapper<LongWritable, Text, Text, Text>{
@@ -33,9 +39,22 @@ public class DataCleaning {
             String jsonLine = value.toString();
             JsonNode matchNode = parseJson(jsonLine);
 
-            if (matchNode == null) return; // invalid JSON format
-            if (!hasValidFields(matchNode)) return;
-            if (!isValidDeckSize(matchNode)) return; 
+            if (matchNode == null) {
+                context.getCounter(DataQuality.INVALID_JSON).increment(1);
+                return;
+            }
+            if (!hasValidFields(matchNode)) {
+                context.getCounter(DataQuality.INVALID_FIELDS).increment(1);
+                return;
+            }
+            if (!isValidDeckSize(matchNode)) {
+                context.getCounter(DataQuality.INVALID_DECK_SIZE).increment(1);
+                return;
+            }
+            // if (hasDuplicateCards(matchNode)) {
+            //     context.getCounter(DataQuality.INVALID_DECK_DUPLICATE).increment(1);
+            //     return;
+            // }
 
             Text canonicalKey = createCanonicalKey(matchNode);
             context.write(canonicalKey, value);
@@ -89,6 +108,20 @@ public class DataCleaning {
             Integer player2DeckSize = node.get("players").get(1).get("deck").asText().length();
             return  player1DeckSize == 16 && player2DeckSize == 16;
         }
+
+        // private boolean hasDuplicateCards(JsonNode node) {
+        //     for (int i = 0; i < 2; i++) {
+        //         String deckStr = node.get("players").get(i).get("deck").asText();
+        //         Set<String> cards = new HashSet<>();
+        //         for (int j = 0; j < 16; j += 2) {
+        //             String card = deckStr.substring(j, j + 2);
+        //             if (!cards.add(card)) {
+        //                 return true;
+        //             }
+        //         }
+        //     }
+        //     return false;
+        // }
 
         private Text createCanonicalKey(JsonNode node) {
             String player1Tag = node.get("players").get(0).get("utag").asText();

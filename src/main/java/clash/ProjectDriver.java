@@ -27,50 +27,62 @@ public class ProjectDriver {
 
     public static void main(String[] args) throws Exception {
 
-        List<String> otherArgs = new ArrayList<>();
+        List<String> positionalArgs = new ArrayList<>();
         boolean useCombiner = true; // default
         int minArchetypeSize = 8;
+        String executionMode = "all"; // options: all, clean, graph, stats
 
-        for (String arg : args) {
-            if (arg.equalsIgnoreCase("-noCombiner")) {
+        for (String argument : args) {
+            if (argument.equalsIgnoreCase("-noCombiner")) {
                 useCombiner = false;
-            } else if (arg.startsWith("-minSize=")) {
-                minArchetypeSize = Integer.parseInt(arg.split("=")[1]);
+            } else if (argument.startsWith("-minSize=")) {
+                minArchetypeSize = Integer.parseInt(argument.split("=")[1]);
+            } else if (argument.startsWith("-job=")) {
+                executionMode = argument.split("=")[1].toLowerCase();
             } else {
-                otherArgs.add(arg);
+                positionalArgs.add(argument);
             }
         }
 
-        if (otherArgs.size() < 2) {
-            System.err.println("Usage: ProjectDriver <raw_input> <base_output_dir> [-noCombiner] [-minSize=X]");
+        if (positionalArgs.size() < 2) {
+            System.err.println("Usage: ProjectDriver <raw_input> <base_output_dir> [-noCombiner] [-minSize=X] [-job=clean|graph|stats|all]");
             System.exit(-1);
         }
 
-        Path rawInput = new Path(otherArgs.get(0));
-        Path baseOutputDir = new Path(otherArgs.get(1));
-        
+        Path rawInput = new Path(positionalArgs.get(0));
+        Path baseOutputDir = new Path(positionalArgs.get(1));
+
         Path cleanOutput = new Path(baseOutputDir, "clean");
         Path nodesEdgesOutput = new Path(baseOutputDir, "nodesEdges");
         Path finalOutput = new Path(baseOutputDir, "final");
 
-        boolean success;
+        boolean runAll = executionMode.equals("all");
 
-        success = runCleaningJob(rawInput, cleanOutput);
-        if (!success) {
-            System.err.println("Data Cleaning Job failed");
-            System.exit(1);
+        // Job 1: Cleaning
+        if (runAll || executionMode.equals("clean")) {
+            boolean success = runCleaningJob(rawInput, cleanOutput);
+            if (!success) {
+                System.err.println("Data Cleaning Job failed");
+                System.exit(1);
+            }
         }
 
-        success = runNodesEdgesJob(cleanOutput, nodesEdgesOutput, useCombiner, minArchetypeSize);
-        if (!success) {
-            System.err.println("Nodes & Edges Job failed");
-            System.exit(1);
+        // Job 2: Nodes & Edges
+        if (runAll || executionMode.equals("graph")) {
+            boolean success = runNodesEdgesJob(cleanOutput, nodesEdgesOutput, useCombiner, minArchetypeSize);
+            if (!success) {
+                System.err.println("Nodes & Edges Job failed");
+                System.exit(1);
+            }
         }
 
-        success = runStatsJob(nodesEdgesOutput, finalOutput);
-        if (!success) {
-            System.err.println("Stats Job failed");
-            System.exit(1);
+        // Job 3: Statistics
+        if (runAll || executionMode.equals("stats")) {
+            boolean success = runStatsJob(nodesEdgesOutput, finalOutput);
+            if (!success) {
+                System.err.println("Stats Job failed");
+                System.exit(1);
+            }
         }
     }
 

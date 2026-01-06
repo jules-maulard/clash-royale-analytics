@@ -32,7 +32,7 @@ yarn jar clash-royale-analytics-0.0.1.jar /user/auber/data_ple/clash_royale/raw_
 
 Logs de benchmarks
 ```bash
-scp lsd:bench* benchmarks/
+scp lsd:bench* benchmarks/logs/
 ```
     
 Données CSV pour analyse

@@ -1,0 +1,22 @@
+Log File;Dataset;MinSize;Combiner;Job Name;Map Input;Map Output;Combine Output;Shuffle Bytes;CPU Time (ms);Total Time (ms)
+bench_100k_8_noCombiner.log;100k;8;OFF;Data Cleaning;100000;99256;0;58094426;14670;48858
+bench_100k_8_noCombiner.log;100k;8;OFF;Nodes & Edges [Combiner=OFF, MinSize=8];98171;294513;0;8148199;13460;48294
+bench_100k_8_noCombiner.log;100k;8;OFF;Stats;86883;23365;0;0;2680;29532
+bench_100k_6.log;100k;6;ON;Data Cleaning;100000;99256;0;58094426;16310;51954
+bench_100k_6.log;100k;6;ON;Nodes & Edges [Combiner=ON, MinSize=6];98171;90611833;149296292;2391842533;648120;1989702
+bench_100k_6.log;100k;6;ON;Stats;70562651;0;0;0;76380;751116
+bench_100k_7.log;100k;7;ON;Data Cleaning;100000;99256;0;58094426;14620;47292
+bench_100k_7.log;100k;7;ON;Nodes & Edges [Combiner=ON, MinSize=7];98171;8148193;6067632;217101187;59080;160338
+bench_100k_7.log;100k;7;ON;Stats;5539248;1582577;0;0;17170;105564
+bench_100k_8.log;100k;8;ON;Data Cleaning;100000;99256;0;58094426;14710;47310
+bench_100k_8.log;100k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];98171;294513;149109;5059401;19550;58272
+bench_100k_8.log;100k;8;ON;Stats;86883;23365;0;0;2760;31170
+bench_200k_6.log;200k;6;ON;Data Cleaning;200000;198512;0;116188846;23620;61536
+bench_200k_6.log;200k;6;ON;Nodes & Edges [Combiner=ON, MinSize=6];98171;90611833;149296292;2391842533;650280;2040594
+bench_200k_6.log;200k;6;ON;Stats;70562651;0;0;0;75170;696354
+bench_200k_7.log;200k;7;ON;Data Cleaning;200000;198512;0;116188846;18150;62418
+bench_200k_7.log;200k;7;ON;Nodes & Edges [Combiner=ON, MinSize=7];98171;8148193;6067632;217101187;56150;159348
+bench_200k_7.log;200k;7;ON;Stats;5539248;1582577;0;0;16180;99978
+bench_200k_8.log;200k;8;ON;Data Cleaning;200000;198512;0;116188846;20460;57858
+bench_200k_8.log;200k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];98171;294513;149109;5059401;19540;56016
+bench_200k_8.log;200k;8;ON;Stats;86883;23365;0;0;2680;32112

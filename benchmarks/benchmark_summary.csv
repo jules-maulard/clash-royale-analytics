@@ -2,27 +2,45 @@ Log File;Dataset;MinSize;Combiner;Job Name;Map Input;Map Output;Combine Output;S
 bench_100k_8_noCombiner.log;100k;8;OFF;Data Cleaning;100000;99256;0;58094426;14670;48858
 bench_100k_8_noCombiner.log;100k;8;OFF;Nodes & Edges [Combiner=OFF, MinSize=8];98171;294513;0;8148199;13460;48294
 bench_100k_8_noCombiner.log;100k;8;OFF;Stats;86883;23365;0;0;2680;29532
+bench_100k_8_mask.log;100k;0;ON;Data Cleaning;100000;99256;0;58094426;16290;50244
+bench_100k_8_mask.log;100k;0;ON;Nodes & Edges [Combiner=ON, MinSize=8];98171;294513;149109;5059401;18260;57384
+bench_100k_8_mask.log;100k;0;ON;Stats;86883;23365;0;0;2700;29622
 bench_100k_6.log;100k;6;ON;Data Cleaning;100000;99256;0;58094426;16310;51954
 bench_100k_6.log;100k;6;ON;Nodes & Edges [Combiner=ON, MinSize=6];98171;90611833;149296292;2391842533;648120;1989702
 bench_100k_6.log;100k;6;ON;Stats;70562651;0;0;0;76380;751116
 bench_100k_7.log;100k;7;ON;Data Cleaning;100000;99256;0;58094426;14620;47292
 bench_100k_7.log;100k;7;ON;Nodes & Edges [Combiner=ON, MinSize=7];98171;8148193;6067632;217101187;59080;160338
 bench_100k_7.log;100k;7;ON;Stats;5539248;1582577;0;0;17170;105564
-bench_100k_8.log;100k;8;ON;Data Cleaning;100000;99256;0;58094426;14710;47310
-bench_100k_8.log;100k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];98171;294513;149109;5059401;19550;58272
-bench_100k_8.log;100k;8;ON;Stats;86883;23365;0;0;2760;31170
+bench_100k_8.log;100k;8;ON;Data Cleaning;100000;99256;0;58094426;15900;52098
+bench_100k_8_recurcif.log;100k;8;ON;Data Cleaning;100000;99256;0;58094426;16990;47154
+bench_100k_8.log;100k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];98171;294513;149109;5059401;18960;57228
+bench_100k_8_recurcif.log;100k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];98171;294513;149109;5059401;18390;52440
+bench_100k_8.log;100k;8;ON;Stats;86883;23365;0;0;2880;31830
+bench_100k_8_recurcif.log;100k;8;ON;Stats;86883;23365;0;0;2660;33012
 bench_10M_8_noCombiner.log;10M;8;OFF;Data Cleaning;10000000;9950314;0;5988778488;785070;2755266
 bench_10M_8_noCombiner.log;10M;8;OFF;Nodes & Edges [Combiner=OFF, MinSize=8];9896713;29690139;0;821427437;692960;3895518
 bench_10M_8_noCombiner.log;10M;8;OFF;Stats;8197508;2932762;0;0;31620;166938
+bench_10M_8_mask.log;10M;0;ON;Data Cleaning;10000000;9950314;0;5988778488;754370;3309888
+bench_10M_8_mask.log;10M;0;ON;Nodes & Edges [Combiner=ON, MinSize=8];9896713;29690139;16188580;545097542;742810;3089580
+bench_10M_8_mask.log;10M;0;ON;Stats;8197508;2932762;0;0;30600;224790
 bench_10M_8.log;10M;8;ON;Data Cleaning;10000000;9950314;0;5988778488;740720;4432392
+bench_10M_8_recurcif.log;10M;8;ON;Data Cleaning;10000000;9950314;0;5988778488;760360;2784702
 bench_10M_8.log;10M;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];9896713;29690139;16188580;545097542;758730;2948166
+bench_10M_8_recurcif.log;10M;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];9896713;29690139;16188580;545097542;744140;3291312
 bench_10M_8.log;10M;8;ON;Stats;8197508;2932762;0;0;35470;184674
+bench_10M_8_recurcif.log;10M;8;ON;Stats;8197508;2932762;0;0;32610;169722
 bench_1M_8_noCombiner.log;1M;8;OFF;Data Cleaning;1000000;993081;0;596025452;91930;270216
 bench_1M_8_noCombiner.log;1M;8;OFF;Nodes & Edges [Combiner=OFF, MinSize=8];984607;2953821;0;81722411;83250;291132
 bench_1M_8_noCombiner.log;1M;8;OFF;Stats;834206;222114;0;0;5670;35202
+bench_1M_8_mask.log;1M;0;ON;Data Cleaning;1000000;993081;0;596025452;91520;292056
+bench_1M_8_mask.log;1M;0;ON;Nodes & Edges [Combiner=ON, MinSize=8];984607;2953821;1540679;51960876;88980;347154
+bench_1M_8_mask.log;1M;0;ON;Stats;834206;222114;0;0;5140;37074
 bench_1M_8.log;1M;8;ON;Data Cleaning;1000000;993081;0;596025452;92590;288270
+bench_1M_8_recurcif.log;1M;8;ON;Data Cleaning;1000000;993081;0;596025452;91300;277080
 bench_1M_8.log;1M;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];984607;2953821;1540679;51960876;88430;327660
+bench_1M_8_recurcif.log;1M;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];984607;2953821;1540679;51960876;80490;338700
 bench_1M_8.log;1M;8;ON;Stats;834206;222114;0;0;5690;39810
+bench_1M_8_recurcif.log;1M;8;ON;Stats;834206;222114;0;0;6050;39366
 bench_200k_8_noCombiner.log;200k;8;OFF;Data Cleaning;200000;198512;0;116188846;24070;57150
 bench_200k_8_noCombiner.log;200k;8;OFF;Nodes & Edges [Combiner=OFF, MinSize=8];98171;294513;0;8148199;13070;49758
 bench_200k_8_noCombiner.log;200k;8;OFF;Stats;86883;23365;0;0;3130;28392
@@ -38,6 +56,12 @@ bench_200k_8.log;200k;8;ON;Stats;86883;23365;0;0;2680;32112
 bench_500k_8_noCombiner.log;500k;8;OFF;Data Cleaning;500000;496612;0;298099579;52830;149778
 bench_500k_8_noCombiner.log;500k;8;OFF;Nodes & Edges [Combiner=OFF, MinSize=8];492026;1476078;0;40838176;45330;163314
 bench_500k_8_noCombiner.log;500k;8;OFF;Stats;420941;108683;0;0;4840;34488
-bench_500k_8.log;500k;8;ON;Data Cleaning;500000;496612;0;298099579;55680;181806
+bench_500k_8_mask.log;500k;0;ON;Data Cleaning;500000;496612;0;298099579;50370;161670
+bench_500k_8_mask.log;500k;0;ON;Nodes & Edges [Combiner=ON, MinSize=8];492026;1476078;765992;25790035;50260;176490
+bench_500k_8_mask.log;500k;0;ON;Stats;420941;108683;0;0;4760;58836
+bench_500k_8.log;500k;8;ON;Data Cleaning;500000;496612;
+bench_500k_8_recurcif.log;500k;8;ON;Data Cleaning;500000;496612;0;298099579;55630;297000
 bench_500k_8.log;500k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];492026;1476078;765992;25790035;49650;183984
+bench_500k_8_recurcif.log;500k;8;ON;Nodes & Edges [Combiner=ON, MinSize=8];492026;1476078;765992;25790035;49300;176796
 bench_500k_8.log;500k;8;ON;Stats;420941;108683;0;0;4690;37488
+bench_500k_8_recurcif.log;500k;8;ON;Stats;420941;108683;0;0;4510;33774

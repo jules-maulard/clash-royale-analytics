@@ -46,10 +46,37 @@ public class NodesEdges {
             String player1SortedDeck = sortDeckCards(player1Node.get("deck").asText());
             String player2SortedDeck = sortDeckCards(player2Node.get("deck").asText());
 
+            // DEBUT RECURCIF
+            // List<List<String>> player1AllArchetypes = new ArrayList<>();
+            // for (int i = 0; i < 8; i++) player1AllArchetypes.add(new ArrayList<>());
+
+            // List<List<String>> player2AllArchetypes = new ArrayList<>();
+            // for (int i = 0; i < 8; i++) player2AllArchetypes.add(new ArrayList<>());
+
+            // List<String> cardsList1 = new ArrayList<>();
+            // for (int i = 0; i < 8; i++) {
+            //     cardsList1.add(player1SortedDeck.substring(i * 2, i * 2 + 2));
+            // }
+
+            // List<String> cardsList2 = new ArrayList<>();
+            // for (int i = 0; i < 8; i++) {
+            //     cardsList2.add(player2SortedDeck.substring(i * 2, i * 2 + 2));
+            // }
+
+            // generateSubDecks(cardsList1, minArchetypeSize, 0, new ArrayList<>(), player1AllArchetypes);
+            // generateSubDecks(cardsList2, minArchetypeSize, 0, new ArrayList<>(), player2AllArchetypes);
+            // FIN RECURCIF
+
             for (int size = minArchetypeSize; size <= 8; size++) {
                 List<String> player1Archetypes = getArchetypesOfSize(player1SortedDeck, size);
                 List<String> player2Archetypes = getArchetypesOfSize(player2SortedDeck, size);
 
+                // DEBUT RECURCIF
+                // List<String> player1Archetypes = player1AllArchetypes.get(size-1);
+                // List<String> player2Archetypes = player2AllArchetypes.get(size-1);
+                // FIN RECURCIF
+
+                
                 // Nodes
                 for (String archetype : player1Archetypes) {
                     context.write(new Text("N" + archetype), new Text(player1Wins ? "1" : "0"));
@@ -114,6 +141,26 @@ public class NodesEdges {
             }
             return archetypes;
         }
+
+        // private void generateSubDecks(List<String> sortedCards, int minSize, int start, List<String> current, List<List<String>> result) {
+        //     int currentSize = current.size();
+        //     if (currentSize >= minSize) {
+        //         StringBuilder subDeck = new StringBuilder();
+        //         for (String card : current) {
+        //             subDeck.append(card);
+        //         }
+        //         result.get(currentSize - 1).add(subDeck.toString());
+        //     }
+        //     if (currentSize == 8) {
+        //         return;
+        //     }
+
+        //     for (int i = start; i < sortedCards.size(); i++) {
+        //         current.add(sortedCards.get(i));
+        //         generateSubDecks(sortedCards, minSize, i + 1, current, result);
+        //         current.remove(current.size() - 1);
+        //     }
+        // }
     }
     
 
